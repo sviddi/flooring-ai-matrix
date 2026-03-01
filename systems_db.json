@@ -1,0 +1,153 @@
+[
+    {
+      "id": "sys_01",
+      "standard_performance": "OS 11b (Dynamic Crack-bridging)",
+      "sika_system": {
+        "name": "Sikafloor® Multiflex PB-21 UV",
+        "recipe": [
+          {"layer": "Primer", "material": "Sikafloor®-151", "consumption_x_kg_m2": 0.4, "packaging_y_kg": 30.0},
+          {"layer": "Base coat", "material": "Sikafloor®-377", "consumption_x_kg_m2": 1.8, "packaging_y_kg": 25.0},
+          {"layer": "Broadcast", "material": "Quartz Sand 0.6-1.2 mm", "consumption_x_kg_m2": 6.0, "packaging_y_kg": 25.0},
+          {"layer": "Top coat", "material": "Sikafloor®-359 N", "consumption_x_kg_m2": 1.0, "packaging_y_kg": 32.5}
+        ],
+        "technical_note": "⏱️ Standard curing time. High elasticity for low temperatures."
+      },
+      "mapei_analogue": {
+        "name": "Mapefloor Parking System HE",
+        "recipe": [
+          {"layer": "Primer", "material": "Primer SN", "consumption_x_kg_m2": 0.6, "packaging_y_kg": 20.0},
+          {"layer": "Base coat", "material": "Mapefloor PU 400", "consumption_x_kg_m2": 2.0, "packaging_y_kg": 19.7},
+          {"layer": "Broadcast", "material": "Quartz Sand 0.5 mm", "consumption_x_kg_m2": 4.0, "packaging_y_kg": 25.0},
+          {"layer": "Top coat", "material": "Mapefloor Finish 451", "consumption_x_kg_m2": 0.7, "packaging_y_kg": 20.0}
+        ],
+        "technical_note": "⏱️ Standard curing time (12-24h between layers). Highest OS 11b crack-bridging."
+      },
+      "mc_bauchemie_analogue": {
+        "name": "MC-Bauchemie OS 11b System",
+        "recipe": [
+          {"layer": "Primer", "material": "MC-DUR 1320 VK", "consumption_x_kg_m2": 0.4, "packaging_y_kg": 30.0},
+          {"layer": "Combined seal/wear coat", "material": "MC-DUR 2211 MB", "consumption_x_kg_m2": 2.3, "packaging_y_kg": 30.0},
+          {"layer": "Broadcast", "material": "Quartz sand 0.3-0.8 mm", "consumption_x_kg_m2": 4.0, "packaging_y_kg": 25.0},
+          {"layer": "Top coat", "material": "MC-DUR 1311", "consumption_x_kg_m2": 0.7, "packaging_y_kg": 30.0}
+        ],
+        "technical_note": "⏱️ Standard curing time. Single-layer combined seal/wear coat technology."
+      },
+      "comparison": {
+        "similarities": "All systems offer dynamic crack-bridging for intermediate or exposed decks. Mapei and MC-Bauchemie meet OS 11b requirements.",
+        "differences_nuances": "MC-Bauchemie OS 11b is a single-layer system where sealing and wear coats are combined, providing dynamic crack-bridging up to 0.3 mm. Mapei uses separate PU 400 + Finish 451 layers.",
+        "max_analogue_reasoning": "Matching OS 11b classification across all three manufacturers ensures equivalent crack-bridging capability."
+      }
+    },
+    {
+      "id": "sys_02",
+      "standard_performance": "OS 8 / OS 13 (Rigid/Intermediate)",
+      "sika_system": {
+        "name": "Sikafloor® Multiflex PB-32",
+        "recipe": [
+          {"layer": "Primer", "material": "Sikafloor®-151", "consumption_x_kg_m2": 0.4, "packaging_y_kg": 30.0},
+          {"layer": "Base coat", "material": "Sikafloor®-377", "consumption_x_kg_m2": 1.8, "packaging_y_kg": 25.0},
+          {"layer": "Broadcast", "material": "Quartz Sand 0.6-1.2 mm", "consumption_x_kg_m2": 6.0, "packaging_y_kg": 25.0},
+          {"layer": "Top coat", "material": "Sikafloor®-378", "consumption_x_kg_m2": 0.9, "packaging_y_kg": 30.0}
+        ],
+        "technical_note": "Rigid system, not UV stable. For indoor use."
+      },
+      "mapei_analogue": {
+        "name": "Mapefloor Parking System ID",
+        "recipe": [
+          {"layer": "Primer", "material": "Primer SN", "consumption_x_kg_m2": 0.5, "packaging_y_kg": 20.0},
+          {"layer": "Base coat", "material": "Mapefloor I 300 SL", "consumption_x_kg_m2": 1.5, "packaging_y_kg": 20.0},
+          {"layer": "Broadcast", "material": "Quartz Sand 0.5 mm", "consumption_x_kg_m2": 3.0, "packaging_y_kg": 25.0},
+          {"layer": "Top coat", "material": "Mapefloor I 300 SL (colored)", "consumption_x_kg_m2": 0.6, "packaging_y_kg": 20.0}
+        ],
+        "technical_note": "Epoxy-based. Yellowing may occur if exposed to direct sunlight."
+      },
+      "mc_bauchemie_analogue": {
+        "name": "MC-DUR 1322 (OS 8 System)",
+        "recipe": [
+          {"layer": "Scratch coat primer", "material": "MC-DUR 1320 VK", "consumption_x_kg_m2": 1.2, "packaging_y_kg": 30.0},
+          {"layer": "Dry shake", "material": "Quartz sand 0.1-0.3 mm", "consumption_x_kg_m2": 0.8, "packaging_y_kg": 25.0},
+          {"layer": "Top seal coat", "material": "MC-DUR 1322", "consumption_x_kg_m2": 0.6, "packaging_y_kg": 30.0}
+        ],
+        "technical_note": "Extremely high mechanical resilience against rising damp."
+      },
+      "comparison": {
+        "similarities": "Multi-layer systems for intermediate indoor decks. High mechanical resilience and seamless protection.",
+        "differences_nuances": "Sika focuses on high-load durability. Mapei ID is a hybrid epoxy/PU solution. MC-Bauchemie MC-DUR 1322 is a highly resistant epoxy system tested against rising damp.",
+        "max_analogue_reasoning": "Both are the 'go-to' solutions for indoor parking ramps and decks where UV resistance is not required but durability is key."
+      }
+    },
+    {
+      "id": "sys_03",
+      "standard_performance": "OS 8 (Rigid Epoxy)",
+      "sika_system": {
+        "name": "Sikafloor® Multidur EB-14",
+        "recipe": [
+          {"layer": "Primer", "material": "Sikafloor®-161", "consumption_x_kg_m2": 0.4, "packaging_y_kg": 30.0},
+          {"layer": "Base coat", "material": "Sikafloor®-264", "consumption_x_kg_m2": 1.0, "packaging_y_kg": 30.0},
+          {"layer": "Broadcast", "material": "Quartz Sand 0.4-0.8 mm", "consumption_x_kg_m2": 4.0, "packaging_y_kg": 25.0},
+          {"layer": "Top coat", "material": "Sikafloor®-264 (seal coat)", "consumption_x_kg_m2": 0.7, "packaging_y_kg": 30.0}
+        ],
+        "technical_note": "Classic rigid epoxy system. High chemical resistance."
+      },
+      "mapei_analogue": {
+        "name": "Mapefloor System 31",
+        "recipe": [
+          {"layer": "Primer", "material": "Primer SN", "consumption_x_kg_m2": 0.5, "packaging_y_kg": 20.0},
+          {"layer": "Base coat", "material": "Mapefloor I 300 SL", "consumption_x_kg_m2": 1.0, "packaging_y_kg": 20.0},
+          {"layer": "Broadcast", "material": "Quartz Sand 0.5 mm", "consumption_x_kg_m2": 3.0, "packaging_y_kg": 25.0},
+          {"layer": "Top coat", "material": "Mapefloor I 300 SL", "consumption_x_kg_m2": 0.6, "packaging_y_kg": 20.0}
+        ],
+        "technical_note": "Classic rigid epoxy system. High chemical resistance."
+      },
+      "mc_bauchemie_analogue": {
+        "name": "MC-DUR 1252 (OS 8 System)",
+        "recipe": [
+          {"layer": "Primer", "material": "MC-DUR 1200 VK", "consumption_x_kg_m2": 0.3, "packaging_y_kg": 30.0},
+          {"layer": "Scratch coat", "material": "MC-DUR 1200 VK + quartz sand", "consumption_x_kg_m2": 0.6, "packaging_y_kg": 30.0},
+          {"layer": "Dry-shake layer", "material": "MC-DUR 1252 + quartz sand", "consumption_x_kg_m2": 1.5, "packaging_y_kg": 30.0},
+          {"layer": "Top seal coat", "material": "MC-DUR 1252", "consumption_x_kg_m2": 0.75, "packaging_y_kg": 30.0}
+        ],
+        "technical_note": "Multi-layer epoxy structure for extreme abrasion resistance."
+      },
+      "comparison": {
+        "similarities": "All are rigid systems with anti-slip properties, certified to OS 8 for mechanical resistance.",
+        "differences_nuances": "Sika uses Sikafloor-161/264. Mapei System 31 uses Primer SN/Mapefloor I 300 SL. MC-Bauchemie uses MC-DUR 1252.",
+        "max_analogue_reasoning": "Direct functional and certification equivalent (OS 8) offering identical mechanical protection for industrial-grade traffic areas."
+      }
+    },
+    {
+      "id": "sys_04",
+      "standard_performance": "OS 11a (Crack-bridging) / Fast Track",
+      "sika_system": {
+        "name": "Sikafloor® Pronto RB-55",
+        "recipe": [
+          {"layer": "Primer", "material": "Sikafloor®-10 / 11 Pronto", "consumption_x_kg_m2": 0.4, "packaging_y_kg": 25.0},
+          {"layer": "Base coat", "material": "Sikafloor®-14 Pronto", "consumption_x_kg_m2": 1.5, "packaging_y_kg": 25.0},
+          {"layer": "Broadcast", "material": "Quartz Sand 0.6-1.2 mm", "consumption_x_kg_m2": 4.0, "packaging_y_kg": 25.0},
+          {"layer": "Top coat", "material": "Sikafloor®-18 Pronto", "consumption_x_kg_m2": 0.6, "packaging_y_kg": 25.0}
+        ],
+        "technical_note": "⚠️ ULTRA-FAST (MMA): Fully cured and ready for traffic in 1-2 hours. Strong odor during application."
+      },
+      "mapei_analogue": {
+        "name": "Mapefloor Parking System ME",
+        "recipe": [
+          {"layer": "Primer", "material": "Primer SN", "consumption_x_kg_m2": 0.6, "packaging_y_kg": 20.0},
+          {"layer": "Base coat", "material": "Mapefloor PU 400", "consumption_x_kg_m2": 1.5, "packaging_y_kg": 19.7},
+          {"layer": "Broadcast", "material": "Quartz Sand 0.5 mm", "consumption_x_kg_m2": 4.0, "packaging_y_kg": 25.0},
+          {"layer": "Top coat", "material": "Mapefloor Finish 451", "consumption_x_kg_m2": 0.6, "packaging_y_kg": 20.0}
+        ],
+        "technical_note": "⚠️ STANDARD CURING (PU): Takes 12-24 hours per layer. Meets OS 11a but is NOT a true 'Fast Track' equivalent."
+      },
+      "mc_bauchemie_analogue": {
+        "name": "MC-DUR OS 11a System (or MC-DUR TopSpeed flex plus)",
+        "recipe": [
+          {"layer": "Primer", "material": "MC-DUR 1311 VK", "consumption_x_kg_m2": 0.4, "packaging_y_kg": 30.0},
+          {"layer": "Seal coat", "material": "MC-DUR 2211 MB", "consumption_x_kg_m2": 1.5, "packaging_y_kg": 30.0},
+          {"layer": "Broadcast", "material": "Quartz Sand 0.3-0.8 mm", "consumption_x_kg_m2": 4.0, "packaging_y_kg": 25.0},
+          {"layer": "Wear layer", "material": "MC-DUR 2211 WL", "consumption_x_kg_m2": 1.5, "packaging_y_kg": 30.0},
+          {"layer": "Top seal", "material": "MC-DUR 1311", "consumption_x_kg_m2": 0.6, "packaging_y_kg": 30.0}
+        ],
+        "technical_note": "⚠️ FAST TRACK (KineticBoost): Rainproof in 2 hours, fully load-bearing in a few hours."
+      }
+    }
+  ]
