@@ -4,7 +4,14 @@ import os
 from pydantic import BaseModel, Field
 from typing import Optional
 from openai import OpenAI
+from curing_time_db import CURING_TIMES
+import pandas as pd
+import plotly.express as px
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
+
+# Настройки страницы должны быть первой командой Streamlit!
+st.set_page_config(page_title="Flooring AI Consultant", layout="wide")
 
 load_dotenv()
 
@@ -94,7 +101,6 @@ def render_proposal(sys_data, area):
     st.markdown(f"- **Differences:** {sys_data['comparison']['differences_nuances']}")
     st.markdown(f"- **System Selection Reasoning:** {sys_data['comparison']['max_analogue_reasoning']}")
     
-    # Юридический дисклеймер
     st.warning("""
     **LEGAL DISCLAIMER:** All consumption figures (kg/m²) are theoretical and based on smooth, non-porous concrete substrates at +20°C. 
     Actual consumption on site may vary significantly due to surface profile (CSP), porosity, wastage, and application methods. 
@@ -102,8 +108,69 @@ def render_proposal(sys_data, area):
     It does not replace an official quote. Always verify values against the latest official Technical Data Sheet (TDS) before ordering materials.
     """)
 
+@st.dialog("Project Schedule", width="large")
+def show_schedule_modal(system_name, recipe, area):
+    st.markdown(f"### {system_name}")
+    
+    daily_norm = st.number_input("Application rate (m²/day per crew):", min_value=50, value=1000, step=50)
+    
+    start_date = datetime.today().replace(hour=8, minute=0, second=0, microsecond=0)
+    current_start = start_date
+    schedule_data = []
+    
+    for item in recipe:
+        material = item['material']
+        layer_name = item['layer']
+        
+        app_days = area / daily_norm
+        
+        # Песок наносится параллельно жидкому слою (wet-on-wet)
+        if "Broadcast" in layer_name or "Dry shake" in layer_name or "quartz sand" in material.lower():
+            if schedule_data:
+                actual_start = schedule_data[-1]["Start"]
+                actual_end = schedule_data[-1]["End"]
+            else:
+                actual_start = current_start
+                actual_end = current_start + timedelta(days=app_days)
+        else:
+            actual_start = current_start
+            actual_end = actual_start + timedelta(days=app_days)
+            
+            curing_info = CURING_TIMES.get(material, {})
+            wait_hours = curing_info.get("min_overcoating_time_h", 12.0)
+            
+            # Следующий слой сдвигается ровно на время высыхания первой "захватки"
+            current_start = actual_start + timedelta(hours=wait_hours)
+            
+        schedule_data.append({
+            "Layer": layer_name,
+            "Material": material,
+            "Start": actual_start,
+            "End": actual_end
+        })
+        
+    # Рассчитываем финальное время с учетом последней сушки под пешеходную нагрузку (foot traffic)
+    max_end_date = max([item["End"] for item in schedule_data])
+    last_material = recipe[-1]['material']
+    final_cure_h = CURING_TIMES.get(last_material, {}).get("foot_traffic_h", 24.0)
+    project_completion = max_end_date + timedelta(hours=final_cure_h)
+    
+    total_days = (project_completion - start_date).total_seconds() / 86400
+    
+    st.success(f"**Estimated total execution time (including curing):** ~{total_days:.1f} days")
+    
+    df = pd.DataFrame(schedule_data)
+    fig = px.timeline(
+        df, x_start="Start", x_end="End", y="Layer", 
+        color="Material", title="Layer-by-layer Execution Schedule",
+        text="Material"
+    )
+    fig.update_yaxes(autorange="reversed") 
+    fig.update_layout(xaxis_title="Timeline", yaxis_title="Stages")
+    
+    st.plotly_chart(fig, use_container_width=True)
+
 # --- 5. INITIALIZATION ---
-st.set_page_config(page_title="Flooring AI Consultant", layout="wide")
 st.title("🤖 Industrial Flooring AI Consultant")
 
 if "messages" not in st.session_state:
@@ -114,6 +181,7 @@ if "messages" not in st.session_state:
 if "project_state" not in st.session_state:
     st.session_state.project_state = {}
 
+# Единый правильный сайдбар без дубликатов
 with st.sidebar:
     st.header("⚙️ Internal Agent State")
     st.json(st.session_state.project_state)
@@ -121,7 +189,26 @@ with st.sidebar:
         st.session_state.messages = []
         st.session_state.project_state = {}
         st.rerun()
-
+        
+    proposal_msgs = [m for m in st.session_state.messages if m.get("type") == "proposal"]
+    if proposal_msgs:
+        st.markdown("---")
+        st.header("📅 Apply Schedules")
+        
+        last_proposal = proposal_msgs[-1]
+        sys_data = last_proposal["sys_data"]
+        area = last_proposal["area"]
+        
+        if st.button(f"📊 Schedule: Sika"):
+            show_schedule_modal(sys_data['sika_system']['name'], sys_data['sika_system']['recipe'], area)
+            
+        if st.button(f"📊 Schedule: Mapei"):
+            show_schedule_modal(sys_data['mapei_analogue']['name'], sys_data['mapei_analogue']['recipe'], area)
+            
+        if "mc_bauchemie_analogue" in sys_data:
+            if st.button(f"📊 Schedule: MC-Bauchemie"):
+                show_schedule_modal(sys_data['mc_bauchemie_analogue']['name'], sys_data['mc_bauchemie_analogue']['recipe'], area)
+    
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         if msg.get("type") == "proposal":
@@ -173,23 +260,25 @@ if prompt := st.chat_input("Type your answer here..."):
             st.markdown(reply)
             
         # --- 7. TRIGGER RECOMMENDATION ---
+        # --- 7. TRIGGER RECOMMENDATION ---
         required_keys = ["temperature", "speed", "life", "uv_resistance", "area_m2"]
         if all(key in st.session_state.project_state for key in required_keys):
             if not any(m.get("type") == "proposal" for m in st.session_state.messages):
-                st.success("All requirements collected! Generating Technical Proposal...")
                 
+                # Ищем подходящую систему и берем площадь
                 sys_data = find_best_system(st.session_state.project_state)
                 area = st.session_state.project_state["area_m2"]
                 
+                # Формируем сообщение с расчетом
                 proposal_msg = {
                     "role": "assistant", 
                     "type": "proposal", 
                     "sys_data": sys_data, 
                     "area": area
                 }
+                
+                # Сохраняем в историю чата
                 st.session_state.messages.append(proposal_msg)
                 
-                with st.chat_message("assistant"):
-                    render_proposal(sys_data, area)
-                    
-                st.info("You can reset the chat in the sidebar to test another scenario.")
+                # Перезагружаем интерфейс, чтобы сайдбар мгновенно увидел новые данные!
+                st.rerun()
