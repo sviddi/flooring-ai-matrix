@@ -1,0 +1,35 @@
+{
+    "Sikafloor®-151": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "FEICA Model EPD (Epoxy)" },
+    "Sikafloor®-377": { "gwp_kg_co2_per_kg": 4.1, "epd_reference": "EPD-FEI-20150250-IBG1-EN", "status": "PU Resin" },
+    "Sikafloor®-359 N": { "gwp_kg_co2_per_kg": 6.36, "epd_reference": "EPD-FEI-20220108-IBG1-EN", "status": "PU Resin" },
+    "Sikafloor®-378": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "Epoxy Resin" },
+    "Sikafloor®-161": { "gwp_kg_co2_per_kg": 3.80, "epd_reference": "EPD-DBC-20220174-IBF1-EN", "status": "FEICA Model EPD (Epoxy)" },
+    "Sikafloor®-264": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "FEICA Model EPD (Epoxy)" },
+    "Sikafloor®-264 (seal coat)": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "FEICA Model EPD (Epoxy)" },
+    "Sikafloor®-10 / 11 Pronto": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20190116-IBE1-EN", "status": "PMMA Resin" },
+    "Sikafloor®-14 Pronto": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20190116-IBE1-EN", "status": "PMMA Resin" },
+    "Sikafloor®-18 Pronto": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20190116-IBE1-EN", "status": "PMMA Resin" },
+    
+    "Primer SN": { "gwp_kg_co2_per_kg": 3.19, "epd_reference": "EPD-IES-0018817:001", "status": "FEICA Model EPD (Epoxy)" },
+    "Mapefloor PU 400": { "gwp_kg_co2_per_kg": 4.79, "epd_reference": "EPD-FEI-20220021-IBG1-EN", "status": "PU Resin" },
+    "Mapefloor Finish 451": { "gwp_kg_co2_per_kg": 6.82, "epd_reference": "EPD-FEI-20220107-IBG1-EN", "status": "PU Resin" },
+    "Mapefloor I 300 SL": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "Epoxy Resin" },
+    "Mapefloor I 300 SL (colored)": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "Epoxy Resin" },
+  
+    "MC-DUR 1320 VK": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "FEICA Model EPD (Epoxy)" },
+    "MC-DUR 2211 MB": { "gwp_kg_co2_per_kg": 8.05, "epd_reference": "EPD-FEI-20220106-IBG1-EN", "status": "PU Resin" },
+    "MC-DUR 1311": { "gwp_kg_co2_per_kg": 4.7, "epd_reference": "EPD-FEI-20220021-IBG1-EN", "status": "PU Resin" },
+    "MC-DUR 1322": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "Epoxy Resin" },
+    "MC-DUR 1200 VK": { "gwp_kg_co2_per_kg":  4.12, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "FEICA Model EPD (Epoxy)" },
+    "MC-DUR 1200 VK + quartz sand": { "gwp_kg_co2_per_kg": 2.07, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "Mixed material (Epoxy + Sand)" },
+    "MC-DUR 1252 + quartz sand": { "gwp_kg_co2_per_kg": 2.07, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "Mixed material (Epoxy + Sand)" },
+    "MC-DUR 1252": { "gwp_kg_co2_per_kg": 4.12, "epd_reference": "EPD-DBC-20220177-IBF1-EN", "status": "Epoxy Resin" },
+    "MC-DUR 1311 VK": { "gwp_kg_co2_per_kg": 4.7, "epd_reference": "EPD-FEI-20220021-IBG1-EN", "status": "PU Resin" },
+    "MC-DUR 2211 WL": { "gwp_kg_co2_per_kg": 8.05, "epd_reference": "EPD-FEI-20220106-IBG1-EN", "status": "PU Resin" },
+  
+    "Quartz Sand 0.6-1.2 mm": { "gwp_kg_co2_per_kg": 0.025, "epd_reference": "Generic LCA", "status": "Aggregate" },
+    "Quartz Sand 0.5 mm": { "gwp_kg_co2_per_kg": 0.025, "epd_reference": "Generic LCA", "status": "Aggregate" },
+    "Quartz sand 0.3-0.8 mm": { "gwp_kg_co2_per_kg": 0.025, "epd_reference": "Generic LCA", "status": "Aggregate" },
+    "Quartz sand 0.1-0.3 mm": { "gwp_kg_co2_per_kg": 0.025, "epd_reference": "Generic LCA", "status": "Aggregate" },
+    "Quartz Sand 0.4-0.8 mm": { "gwp_kg_co2_per_kg": 0.025, "epd_reference": "Generic LCA", "status": "Aggregate" }
+  }

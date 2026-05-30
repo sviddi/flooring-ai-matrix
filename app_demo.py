@@ -19,14 +19,20 @@ client = OpenAI()
 
 # --- 1. LOAD DATABASE ---
 @st.cache_data
-def load_db():
-    if not os.path.exists("systems_db.json"):
-        st.error("Database systems_db.json not found!")
+def load_dbs():
+    if not os.path.exists("systems_db.json") or not os.path.exists("co2_epd_db.json"):
+        st.error("Databases not found! Make sure systems_db.json and co2_epd_db.json are in the folder.")
         st.stop()
+    
     with open("systems_db.json", "r", encoding="utf-8") as f:
-        return json.load(f)
+        systems = json.load(f)
+        
+    with open("co2_epd_db.json", "r", encoding="utf-8") as f:
+        co2 = json.load(f)
+        
+    return systems, co2
 
-db = load_db()
+db, co2_db = load_dbs()
 
 # --- 2. DEFINE STATE MODEL ---
 class ProjectState(BaseModel):
@@ -48,18 +54,33 @@ def find_best_system(state: dict):
     else:
         return next(s for s in db if s["id"] == "sys_02") 
 
+
 def calculate_materials(recipe, area):
     calc_result = []
+    total_co2 = 0.0
+    
     for layer in recipe:
         x = layer.get("consumption_x_kg_m2")
         y = layer.get("packaging_y_kg")
+        mat_name = layer.get('material')
+        
         if x and y:
             total_kg = round(x * area, 1)
             total_packs = round(total_kg / y)
-            calc_result.append(f"- **{layer['layer']}**: ~{x} kg/m² ➔ **{total_kg}kg** (~{total_packs} pcs)")
+            
+            # Достаем показатель GWP (CO2) из базы данных co2_epd_db.json
+            co2_data = co2_db.get(mat_name, {})
+            co2_factor = co2_data.get("gwp_kg_co2_per_kg", 0.0)
+            
+            # Считаем след для конкретного слоя
+            layer_co2 = round(total_kg * co2_factor, 1)
+            total_co2 += layer_co2
+            
+            calc_result.append(f"- **{layer['layer']}**: ~{x} kg/m² ➔ **{total_kg}kg** (~{total_packs} pcs) | 🌿 _{layer_co2} kg CO₂_")
         else:
             calc_result.append(f"- **{layer['layer']}**: Consumption per TDS")
-    return "\n".join(calc_result)
+            
+    return "\n".join(calc_result), round(total_co2, 1)
 
 # --- 4. UI RENDERER FOR PROPOSAL CARDS ---
 def render_proposal(sys_data, area):
@@ -72,7 +93,9 @@ def render_proposal(sys_data, area):
         with st.container(border=True):
             st.error(f"**🔴 Sika Baseline System**")
             st.markdown(f"**{sys_data['sika_system']['name']}**")
-            st.markdown(calculate_materials(sys_data['sika_system']['recipe'], area))
+            materials_text, sika_co2 = calculate_materials(sys_data['sika_system']['recipe'], area)
+            st.markdown(materials_text)
+            st.markdown(f"**🌍 Total GWP:** `{sika_co2} kg CO₂e`")
             if sys_data['sika_system'].get('technical_note'):
                 st.caption(f"_{sys_data['sika_system']['technical_note']}_")
             
@@ -80,7 +103,9 @@ def render_proposal(sys_data, area):
         with st.container(border=True):
             st.info(f"**🔵 Mapei Functional Alternative**")
             st.markdown(f"**{sys_data['mapei_analogue']['name']}**")
-            st.markdown(calculate_materials(sys_data['mapei_analogue']['recipe'], area))
+            materials_text, mapei_co2 = calculate_materials(sys_data['mapei_analogue']['recipe'], area)
+            st.markdown(materials_text)
+            st.markdown(f"**🌍 Total GWP:** `{mapei_co2} kg CO₂e`")
             if sys_data['mapei_analogue'].get('technical_note'):
                 st.caption(f"_{sys_data['mapei_analogue']['technical_note']}_")
             
@@ -89,7 +114,9 @@ def render_proposal(sys_data, area):
             st.success(f"**🟢 MC-Bauchemie Functional Alternative**")
             if "mc_bauchemie_analogue" in sys_data:
                 st.markdown(f"**{sys_data['mc_bauchemie_analogue']['name']}**")
-                st.markdown(calculate_materials(sys_data['mc_bauchemie_analogue']['recipe'], area))
+                materials_text, mc_co2 = calculate_materials(sys_data['mc_bauchemie_analogue']['recipe'], area)
+                st.markdown(materials_text)
+                st.markdown(f"**🌍 Total GWP:** `{mc_co2} kg CO₂e`")
                 if sys_data['mc_bauchemie_analogue'].get('technical_note'):
                     st.caption(f"_{sys_data['mc_bauchemie_analogue']['technical_note']}_")
             else:
@@ -103,9 +130,8 @@ def render_proposal(sys_data, area):
     
     st.warning("""
     **LEGAL DISCLAIMER:** All consumption figures (kg/m²) are theoretical and based on smooth, non-porous concrete substrates at +20°C. 
-    Actual consumption on site may vary significantly due to surface profile (CSP), porosity, wastage, and application methods. 
-    This calculation does not include standard waste allowances (typically 5-10%) and is intended for budget estimation purposes only. 
-    It does not replace an official quote. Always verify values against the latest official Technical Data Sheet (TDS) before ordering materials.
+    CO2 footprint calculations (GWP) are indicative averages based on EPDs for A1-A3 manufacturing phases. 
+    Always verify values against the latest official Technical Data Sheet (TDS) and manufacturer EPDs before ordering materials.
     """)
 
 @st.dialog("Project Schedule", width="large")
