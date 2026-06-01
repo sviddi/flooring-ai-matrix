@@ -10,6 +10,9 @@ import plotly.express as px
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
+
+# Добавляем имя и ссылку в шапку
+st.markdown("**Created by:** [Mykhailo Svidnytskyi](https://www.linkedin.com/in/svidnytskyim)")
 # Настройки страницы должны быть первой командой Streamlit!
 st.set_page_config(page_title="Flooring AI Consultant", layout="wide")
 
